@@ -26,6 +26,7 @@ export interface StockDataMetaData {
   lastRefreshed?: string;
   outputSize?: string | null;
   timeZone?: string | null;
+  name?: string | null;
 }
 
 export interface StockDataSampleDTO {
@@ -140,7 +141,7 @@ export class HttpClient<SecurityDataType = unknown> {
   }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || "",
+      baseURL: "https://localhost:7146/",
     });
     this.secure = secure;
     this.format = format;
@@ -270,6 +271,7 @@ export class Api<
         Function?: string;
         Symbol?: string;
         OutputSize?: string;
+        Name?: string;
       },
       params: RequestParams = {}
     ) =>

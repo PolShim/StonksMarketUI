@@ -1,6 +1,10 @@
 import { combineReducers } from "redux";
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import thunkMiddleware from "redux-thunk"; // Example middleware, you can add your own
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 
@@ -19,7 +23,8 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: [thunkMiddleware],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export type AppDispatch = typeof store.dispatch;

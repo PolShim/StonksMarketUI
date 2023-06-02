@@ -1,0 +1,22 @@
+.marketStockList{
+    &__h2{
+        font-weight: 700;
+    }
+    &__h4{
+        font-weight: 700;
+    }
+    &__percentage{
+        font-size: 1.25rem;
+        font-weight: 550;
+        margin-bottom: 0.5rem;
+        &__up{
+            color: green;
+        }
+        &__down{
+            color: red
+        }
+        &__noChange{
+            color: gray
+        }
+    }
+}
