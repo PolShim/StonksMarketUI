@@ -53,9 +53,9 @@ export function MarketStockList() {
     if (firstValue > secondValue) {
       return <North sx={{ fontSize: 30, color: "green" }} />;
     } else if (firstValue < secondValue) {
-      return <East sx={{ fontSize: 30, color: "red" }} />;
+      return <South sx={{ fontSize: 30, color: "red" }} />;
     } else {
-      return <South sx={{ fontSize: 30, color: "gray" }} />;
+      return <East sx={{ fontSize: 30, color: "gray" }} />;
     }
   }
 

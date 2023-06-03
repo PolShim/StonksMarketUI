@@ -26,9 +26,10 @@ import {
   StockDataDailyResponseDTO,
 } from "../StonksMarketAPI";
 import "../components/marketStocksList/MarketStockList.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { StocksChart } from "../components/stocksChart/StocksChart";
+import gifImage from "../Assets/stonks.gif";
 export function StockDetailsPage() {
   const actualUserData = useAppSelector(selectUserData);
   const stockData = useAppSelector(selectStocksData);
@@ -36,6 +37,14 @@ export function StockDetailsPage() {
   const actualSelectedSymbol = useAppSelector(selectActualSelectedStockSymbol);
 
   const dispatch = useAppDispatch();
+
+  const [showStonks, setShowStonks] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowStonks(false);
+    }, 5000);
+  }, [showStonks]);
 
   const [quantity, setQuantity] = useState(0);
 
@@ -115,14 +124,14 @@ export function StockDetailsPage() {
   async function Buy(numberOfStock: number) {
     const reqest = getRequestToSellOrBuyStock(numberOfStock);
     const response = (await dispatch(buyStocks(reqest))).payload;
-
+    await setShowStonks(true);
     await refreshData();
   }
 
   async function Sell(numberOfStock: number) {
     const reqest = getRequestToSellOrBuyStock(numberOfStock);
     const response = (await dispatch(sellStocks(reqest))).payload;
-
+    await setShowStonks(true);
     await refreshData();
   }
 
@@ -198,7 +207,7 @@ export function StockDetailsPage() {
           </Row>
         </Col>
         <Col>
-          <Row className="p-5">
+          <Row className="ps-5 pe-5">
             <Form className="justify-content-center">
               <Form.Group className="mb-3 " controlId="formActions">
                 <Form.Label>
@@ -227,6 +236,14 @@ export function StockDetailsPage() {
                 </Button>
               </Form.Group>
             </Form>
+          </Row>
+
+          <Row className="p-5 d-flex justify-content-center">
+            <img
+              src={gifImage}
+              alt="GIF"
+              style={{ width: "20rem", height: "auto", borderRadius: "45px" }}
+            />
           </Row>
         </Col>
       </Row>
